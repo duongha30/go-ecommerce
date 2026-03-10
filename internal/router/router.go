@@ -1,8 +1,7 @@
 package router
 
 import (
-	"net/http"
-
+	"github.com/duongha/go-ecommerce/internal/controller"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,11 +11,7 @@ func NewRouter() *gin.Engine {
 
 	v1 := r.Group("/v1")
 	{ // group endpoint for versioning v1
-		v1.GET("/ping", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "pong",
-			})
-		})
+		v1.GET("/user", controller.NewUserController().GetUserById) // GET /v1/ping
 	}
 	return r
 }
