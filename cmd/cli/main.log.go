@@ -27,8 +27,9 @@ func getEncoderLog() zapcore.Encoder { // Format log
 }
 
 func getWriterSync() zapcore.WriteSyncer {
-	file, _ := os.OpenFile("./log/log.txt", os.O_CREATE|os.O_WRONLY, os.ModePerm)
+	os.MkdirAll("./log", os.ModePerm)
+	file, _ := os.OpenFile("./log/log.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	syncFile := zapcore.AddSync(file)
-	syncConsole := zapcore.AddSync(os.Stderr) // notion
+	syncConsole := zapcore.Lock(os.Stdout)
 	return zapcore.NewMultiWriteSyncer(syncConsole, syncFile)
 }
