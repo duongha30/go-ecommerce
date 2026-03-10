@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/duongha/go-ecommerce/internal/service"
+	"github.com/duongha/go-ecommerce/pkg/response"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,7 +19,5 @@ func NewUserController() *UserController {
 }
 
 func (uc *UserController) GetUserById(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": uc.userService.GetInfoUser(),
-	})
+	response.Success(c, http.StatusOK, "Get user by id")
 }
