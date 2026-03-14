@@ -32,6 +32,7 @@ func InitMySQL() {
 	SetPool()
 	// migrate database
 	migrateDatabase()
+	fmt.Println("Initialized MySQL successfully")
 }
 
 func SetPool() {
